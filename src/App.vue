@@ -5,15 +5,15 @@
     </div>
     <div class="card">
       <h2>Погода в РФ</h2>
-      <select v-model="selected" class="form-control">
+      <select v-model="selected" class="form-control" @click="load">
         <option disabled value="">Выберите название города</option>
         <option v-for="item in cityList" :key="item">{{ item }}</option>
       </select>
-      <button class="btn primary" @click="load">
+      <!-- <button class="btn primary">
         Узнать погоду в {{ selected }}
-      </button>
+      </button> -->
       <div>
-        <h3>
+        <h3 v-if="selected">
           Погода в городе {{ selected }} сейчас:
           {{ this.$store.state.cityTemp }}
           градусов цельсия
@@ -32,12 +32,12 @@ export default Vue.extend({
       cityList: this.$store.state.city,
     };
   },
-  computed: {
+  computed: {},
+  methods: {
     load() {
       return this.$store.dispatch("loadWeather", this.selected);
     },
   },
-  methods: {},
 });
 </script>
 
